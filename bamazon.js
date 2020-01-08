@@ -59,10 +59,10 @@ function promptCustomerForItem(item){
             // based on their answer, either call the bid or the post functions
             console.log("User typedp: " + answer.productID)
             console.log("User would like the following quantity: " + answer.productQuantity)
-            console.log("Database value: " + item.stock_quantity)
+            console.log("Database value: " + item[answer.productID - 1].stock_quantity)
 
-            // if (answer.productQuantity > item.stock_quantity)
-            // console.log("Insufficient number of units")
+            if (answer.productQuantity > item[answer.productID - 1].stock_quantity)
+            console.log("Insufficient number of units")
             
             connection.query("UPDATE products SET stock_quantity = stock_quantity - ? where item_id = ? ",[answer.productQuantity, answer.productID],  function (err, res) {
                 if (err) throw err;
